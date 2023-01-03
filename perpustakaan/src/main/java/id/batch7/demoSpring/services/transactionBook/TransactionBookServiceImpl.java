@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import id.batch7.demoSpring.repositories.TransactionBookRepository;
 import id.batch7.demoSpring.models.dto.request.TransactionBookRequest;
 import id.batch7.demoSpring.models.dto.response.ResponseData;
+import id.batch7.demoSpring.models.entity.Book;
+import id.batch7.demoSpring.models.entity.User;
 import id.batch7.demoSpring.models.entity.TransactionBook;
 import id.batch7.demoSpring.validators.TransactionBookValidator;
 
@@ -37,6 +39,16 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setBookId(request.getBookId());
         TransactionBook.setUserId(request.getUserId());
         TransactionBook.setIsBorrowed(request.getIsBorrowed());
+
+        // Find category name
+        Book book = bookRepository.findById(request.getBookId());
+        User user = userRepository.findById(request.getUserId());
+        if (Objects.isNull(book)) {
+            throw new CustomNotFoundException("ID Book is not found!");
+        }
+        if (Objects.isNull(user)) {
+            throw new CustomNotFoundException("ID User is not found!");
+        }
 
         // Save to repo
         TransactionBookRepository.save(TransactionBook);
@@ -83,6 +95,16 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setBookId(request.getBookId());
         TransactionBook.setUserId(request.getUserId());
         TransactionBook.setIsBorrowed(request.getIsBorrowed());
+
+        // Find category name
+        Book book = bookRepository.findById(request.getBookId());
+        User user = userRepository.findById(request.getUserId());
+        if (Objects.isNull(book)) {
+            throw new CustomNotFoundException("ID Book is not found!");
+        }
+        if (Objects.isNull(user)) {
+            throw new CustomNotFoundException("ID User is not found!");
+        }
 
         TransactionBookRepository.save(TransactionBook);
 
