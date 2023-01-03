@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     @Override
-    public ResponseData readCategorysService(Boolean status) {
+    public ResponseData readCategoriesService(Boolean status) {
         // TODO Auto-generated method stub
         if (status == null) {
             categories = categoryRepository.findAll();

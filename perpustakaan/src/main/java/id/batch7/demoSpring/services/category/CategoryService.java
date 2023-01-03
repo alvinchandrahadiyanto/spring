@@ -9,7 +9,7 @@ public interface CategoryService {
   ResponseData createCategoryService(CategoryRequest request) throws Exception;
 
   // Read
-  ResponseData readCategorysService(Boolean status);
+  ResponseData readCategoriesService(Boolean status);
 
   // By Id
   ResponseData readCategoryService(Integer id) throws Exception;
