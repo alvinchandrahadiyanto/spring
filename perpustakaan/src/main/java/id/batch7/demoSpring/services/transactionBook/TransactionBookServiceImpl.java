@@ -48,15 +48,15 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setUserId(request.getUserId());
         TransactionBook.setIsBorrowed(request.getIsBorrowed());
 
-        // Find category name
-        Optional<Book> book = bookRepository.findById(request.getBookId());
-        Optional<User> user = userRepository.findById(request.getUserId());
-        if (Objects.isNull(book)) {
-            throw new CustomNotFoundException("ID Book is not found!");
-        }
-        if (Objects.isNull(user)) {
-            throw new CustomNotFoundException("ID User is not found!");
-        }
+        // // Find category name
+        // Optional<Book> book = bookRepository.findById((Long)request.getBookId());
+        // Optional<User> user = userRepository.findById((Integer)request.getUserId());
+        // if (Objects.isNull(book)) {
+        //     throw new CustomNotFoundException("ID Book is not found!");
+        // }
+        // if (Objects.isNull(user)) {
+        //     throw new CustomNotFoundException("ID User is not found!");
+        // }
 
         // Save to repo
         TransactionBookRepository.save(TransactionBook);
@@ -102,15 +102,15 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setUserId(request.getUserId());
         TransactionBook.setIsBorrowed(request.getIsBorrowed());
 
-        // Find category name
-        Optional<Book> book = bookRepository.findById(request.getBookId());
-        Optional<User> user = userRepository.findById(request.getUserId());
-        if (Objects.isNull(book)) {
-            throw new CustomNotFoundException("ID Book is not found!");
-        }
-        if (Objects.isNull(user)) {
-            throw new CustomNotFoundException("ID User is not found!");
-        }
+        // // Find category name
+        // Optional<Book> book = bookRepository.findById(request.getBookId());
+        // Optional<User> user = userRepository.findById(request.getUserId());
+        // if (Objects.isNull(book)) {
+        //     throw new CustomNotFoundException("ID Book is not found!");
+        // }
+        // if (Objects.isNull(user)) {
+        //     throw new CustomNotFoundException("ID User is not found!");
+        // }
 
         TransactionBookRepository.save(TransactionBook);
 

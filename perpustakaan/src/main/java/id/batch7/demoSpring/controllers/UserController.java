@@ -18,7 +18,7 @@ import id.batch7.demoSpring.services.user.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/Users")
+@RequestMapping("/users")
 public class UserController {
   @Autowired
   private UserService UserService;
