@@ -9,7 +9,7 @@ import id.batch7.demoSpring.models.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-  User findByName(String nameUser);
+  User findByNameUser(String nameUser);
 
   List<User> findByIsDeleted(Boolean status);
 }

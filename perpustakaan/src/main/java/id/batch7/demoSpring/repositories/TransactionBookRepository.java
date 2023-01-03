@@ -9,5 +9,5 @@ import id.batch7.demoSpring.models.entity.TransactionBook;
 
 @Repository
 public interface TransactionBookRepository extends JpaRepository<TransactionBook, Integer> {
-  List<TransactionBook> findByIsDeleted(Boolean status);
+  
 }

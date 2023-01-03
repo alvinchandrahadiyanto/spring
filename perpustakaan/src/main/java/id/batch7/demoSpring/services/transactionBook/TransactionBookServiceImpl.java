@@ -1,6 +1,7 @@
 package id.batch7.demoSpring.services.transactionBook;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import id.batch7.demoSpring.exceptions.custom.CustomNotFoundException;
 import id.batch7.demoSpring.repositories.TransactionBookRepository;
 import id.batch7.demoSpring.models.dto.request.TransactionBookRequest;
 import id.batch7.demoSpring.models.dto.response.ResponseData;
 import id.batch7.demoSpring.models.entity.Book;
 import id.batch7.demoSpring.models.entity.User;
+import id.batch7.demoSpring.repositories.BookRepository;
+import id.batch7.demoSpring.repositories.UserRepository;
 import id.batch7.demoSpring.models.entity.TransactionBook;
 import id.batch7.demoSpring.validators.TransactionBookValidator;
 
@@ -25,6 +29,10 @@ public class TransactionBookServiceImpl implements TransactionBookService{
 
     @Autowired
     private TransactionBookValidator TransactionBookValidator;
+
+    private BookRepository bookRepository;
+
+    private UserRepository userRepository;
 
     private TransactionBook TransactionBook;
     private ResponseData responseData;
@@ -41,8 +49,8 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setIsBorrowed(request.getIsBorrowed());
 
         // Find category name
-        Book book = bookRepository.findById(request.getBookId());
-        User user = userRepository.findById(request.getUserId());
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        Optional<User> user = userRepository.findById(request.getUserId());
         if (Objects.isNull(book)) {
             throw new CustomNotFoundException("ID Book is not found!");
         }
@@ -63,8 +71,6 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         // TODO Auto-generated method stub
         if (status == null) {
             categories = TransactionBookRepository.findAll();
-          } else {
-            categories = TransactionBookRepository.findByIsDeleted(status);
           }
   
         responseData = new ResponseData(200, "success", categories);
@@ -97,8 +103,8 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setIsBorrowed(request.getIsBorrowed());
 
         // Find category name
-        Book book = bookRepository.findById(request.getBookId());
-        User user = userRepository.findById(request.getUserId());
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        Optional<User> user = userRepository.findById(request.getUserId());
         if (Objects.isNull(book)) {
             throw new CustomNotFoundException("ID Book is not found!");
         }
