@@ -1,7 +1,6 @@
 package id.batch7.demoSpring.services.transactionBook;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,8 @@ import id.batch7.demoSpring.models.dto.response.ResponseData;
 import id.batch7.demoSpring.models.entity.TransactionBook;
 import id.batch7.demoSpring.validators.TransactionBookValidator;
 
+@Service
+@Transactional
 public class TransactionBookServiceImpl implements TransactionBookService{
 
     @Autowired
@@ -33,9 +34,9 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook = new TransactionBook();
 
         // Convert DTO to Entity
-        TransactionBook.setBook_id(request.getBook_id());
-        TransactionBook.setNameUser(request.getName_user());
-        TransactionBook.setIsBorrowed(request.getIs_borrowed());
+        TransactionBook.setBookId(request.getBookId());
+        TransactionBook.setUserId(request.getUserId());
+        TransactionBook.setIsBorrowed(request.getIsBorrowed());
 
         // Save to repo
         TransactionBookRepository.save(TransactionBook);
@@ -79,31 +80,14 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
 
         TransactionBook = TransactionBookFind.get();
-        TransactionBook.setBook_id(request.getBook_id());
-        TransactionBook.setNameUser(request.getName_user());
-        TransactionBook.setIsBorrowed(request.getIs_borrowed());
+        TransactionBook.setBookId(request.getBookId());
+        TransactionBook.setUserId(request.getUserId());
+        TransactionBook.setIsBorrowed(request.getIsBorrowed());
 
         TransactionBookRepository.save(TransactionBook);
 
         responseData = new ResponseData(200, "TransactionBook success updated", TransactionBook);
         return responseData;
     }
-
-    @Override
-    public ResponseData deleteTransactionBookService(Integer id) throws Exception {
-        // TODO Auto-generated method stub
-        Optional<TransactionBook> TransactionBookFind = TransactionBookRepository.findById(id);
-        TransactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
-
-        TransactionBook = TransactionBookFind.get();
-        TransactionBookValidator.validateIsAlreadyDeleted(TransactionBook);
-
-        TransactionBook.setIsDeleted(true);
-
-        TransactionBookRepository.save(TransactionBook);
-
-        responseData = new ResponseData(200, "success deleted", null);
-        return responseData;
-  }
-    
+ 
 }

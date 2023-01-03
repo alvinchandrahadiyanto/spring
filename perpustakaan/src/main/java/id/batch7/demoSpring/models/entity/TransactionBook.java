@@ -18,11 +18,9 @@ public class TransactionBook {
     @JsonIgnore
     private Integer id;
 
-    private Long book_id;
+    private Long bookId;
 
-    private String nameUser;
+    private Integer userId;
 
     private Boolean isBorrowed = false;
-
-    private Boolean isDeleted = false;
 }

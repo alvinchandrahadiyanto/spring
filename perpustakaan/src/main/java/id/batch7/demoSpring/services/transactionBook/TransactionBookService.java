@@ -16,7 +16,4 @@ public interface TransactionBookService {
 
   // Update
   ResponseData updateTransactionBookService(Integer id, TransactionBookRequest request) throws Exception;
-
-  // Delete
-  ResponseData deleteTransactionBookService(Integer id) throws Exception;
 }

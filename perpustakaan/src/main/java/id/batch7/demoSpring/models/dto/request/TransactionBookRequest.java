@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TransactionBookRequest {
   @NotBlank(message = "ID Buku harus diisi!")
-  private Long book_id;
+  private Long bookId;
 
-  @NotBlank(message = "Nama user harus diisi!")
-  private String name_user;
+  @NotBlank(message = "ID user harus diisi!")
+  private Integer userId;
 
   @NotBlank(message = "apakah dipinjam harus diisi!")
-  private Boolean is_borrowed;
+  private Boolean isBorrowed;
 }

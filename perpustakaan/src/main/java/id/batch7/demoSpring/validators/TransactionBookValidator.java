@@ -15,10 +15,4 @@ public class TransactionBookValidator {
       throw new CustomNotFoundException("TransactionBook is not found!");
     }
   }
-
-  public void validateIsAlreadyDeleted(TransactionBook TransactionBook) throws Exception {
-    if (TransactionBook.getIsDeleted()) {
-      throw new Exception("TransactionBook is already deleted!");
-    }
-  }
 }

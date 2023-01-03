@@ -1,7 +1,6 @@
 package id.batch7.demoSpring.services.category;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,8 @@ import id.batch7.demoSpring.models.dto.response.ResponseData;
 import id.batch7.demoSpring.models.entity.Category;
 import id.batch7.demoSpring.validators.CategoryValidator;
 
+@Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService{
 
     @Autowired
