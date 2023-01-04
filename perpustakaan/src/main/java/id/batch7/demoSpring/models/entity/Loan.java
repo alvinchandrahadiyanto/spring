@@ -1,9 +1,5 @@
 package id.batch7.demoSpring.models.entity;
 
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,9 +8,9 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "transactionBook")
+@Table(name = "loan")
 @Data
-public class TransactionBook {
+public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,8 +18,6 @@ public class TransactionBook {
     private Long bookId;
 
     private Integer userId;
-
-    private Boolean isBorrowed = false;
 
     private String borrowedDate;
 

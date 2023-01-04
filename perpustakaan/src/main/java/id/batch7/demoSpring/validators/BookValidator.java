@@ -18,7 +18,13 @@ public class BookValidator {
 
   public void validateIsAlreadyDeleted(Book book) throws Exception {
     if (book.getIsDeleted()) {
-      throw new Exception("Book is already deleted!");
+      throw new CustomNotFoundException("Book is already deleted!");
+    }
+  }
+
+  public void validateIsAlreadyBorrowed(Book book) throws Exception {
+    if (book.getIsBorrowed()) {
+      throw new CustomNotFoundException("Book is already borrowed!");
     }
   }
 }
