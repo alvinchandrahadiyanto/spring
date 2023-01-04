@@ -25,9 +25,9 @@ public class TransactionBookController {
   private ResponseData responseData;
 
   @PostMapping
-  public ResponseEntity<?> addTransactionBook(@RequestBody @Valid TransactionBookRequest request) {
+  public ResponseEntity<?> borrowTransactionBook(@RequestBody @Valid TransactionBookRequest request) {
     try {
-      responseData = TransactionBookService.createTransactionBookService(request);
+      responseData = TransactionBookService.borrowTransactionBookService(request);
       return ResponseEntity.status(responseData.getStatus()).body(responseData);
     } catch (Exception e) {
       // TODO: handle exception
@@ -59,6 +59,12 @@ public class TransactionBookController {
   @PutMapping("/{id}")
   public ResponseEntity<?> updateTransactionBookById(@PathVariable Integer id, @RequestBody TransactionBookRequest request) throws Exception {
     responseData = TransactionBookService.updateTransactionBookService(id, request);
+    return ResponseEntity.status(responseData.getStatus()).body(responseData);
+  }
+
+  @PutMapping("return/{id}")
+  public ResponseEntity<?> returnTransactionBookService(@PathVariable Integer id) throws Exception {
+    responseData = TransactionBookService.returnTransactionBookService(id);
     return ResponseEntity.status(responseData.getStatus()).body(responseData);
   }
 }

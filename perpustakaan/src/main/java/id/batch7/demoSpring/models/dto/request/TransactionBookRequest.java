@@ -12,6 +12,4 @@ public class TransactionBookRequest {
   private Long bookId;
 
   private Integer userId;
-
-  private Boolean isBorrowed;
 }

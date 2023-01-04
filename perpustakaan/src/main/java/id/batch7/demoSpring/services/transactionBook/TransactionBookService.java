@@ -6,7 +6,7 @@ import id.batch7.demoSpring.models.dto.response.ResponseData;
 public interface TransactionBookService {
   // kerangka methods untuk CRUD TransactionBook
   // Create
-  ResponseData createTransactionBookService(TransactionBookRequest request) throws Exception;
+  ResponseData borrowTransactionBookService(TransactionBookRequest request) throws Exception;
 
   // Read
   ResponseData readTransactionBooksService(Boolean status);
@@ -16,4 +16,7 @@ public interface TransactionBookService {
 
   // Update
   ResponseData updateTransactionBookService(Integer id, TransactionBookRequest request) throws Exception;
+
+  // Return
+  ResponseData returnTransactionBookService(Integer id) throws Exception;
 }

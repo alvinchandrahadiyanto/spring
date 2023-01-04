@@ -1,5 +1,7 @@
 package id.batch7.demoSpring.models.entity;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -23,4 +25,8 @@ public class TransactionBook {
     private Integer userId;
 
     private Boolean isBorrowed = false;
+
+    private String borrowedDate;
+
+    private String returnedDate;
 }
