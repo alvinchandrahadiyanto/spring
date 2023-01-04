@@ -26,10 +26,10 @@ import id.batch7.demoSpring.validators.TransactionBookValidator;
 public class TransactionBookServiceImpl implements TransactionBookService{
 
     @Autowired
-    private TransactionBookRepository TransactionBookRepository;
+    private TransactionBookRepository transactionBookRepository;
 
     @Autowired
-    private TransactionBookValidator TransactionBookValidator;
+    private TransactionBookValidator transactionBookValidator;
 
     @Autowired
     private BookRepository bookRepository;
@@ -37,7 +37,7 @@ public class TransactionBookServiceImpl implements TransactionBookService{
     @Autowired
     private UserRepository userRepository;
 
-    private TransactionBook TransactionBook;
+    private TransactionBook transactionBook;
     private ResponseData responseData;
     private List<TransactionBook> categories;
 
@@ -46,13 +46,13 @@ public class TransactionBookServiceImpl implements TransactionBookService{
     @Override
     public ResponseData borrowTransactionBookService(TransactionBookRequest request) throws Exception {
         // TODO Auto-generated method stub
-        TransactionBook = new TransactionBook();
+        transactionBook = new TransactionBook();
 
         // Convert DTO to Entity
-        TransactionBook.setBookId(request.getBookId());
-        TransactionBook.setUserId(request.getUserId());
-        TransactionBook.setIsBorrowed(true);
-        TransactionBook.setBorrowedDate(dateTime.toString());
+        transactionBook.setBookId(request.getBookId());
+        transactionBook.setUserId(request.getUserId());
+        transactionBook.setIsBorrowed(true);
+        transactionBook.setBorrowedDate(dateTime.toString());
 
         // Find category name
         Optional<Book> book = bookRepository.findById(request.getBookId());
@@ -65,10 +65,10 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         }
 
         // Save to repo
-        TransactionBookRepository.save(TransactionBook);
+        transactionBookRepository.save(transactionBook);
 
         // Response Data
-        responseData = new ResponseData(HttpStatus.CREATED.value(), "success", TransactionBook);
+        responseData = new ResponseData(HttpStatus.CREATED.value(), "success", transactionBook);
         return responseData;
     }
 
@@ -76,7 +76,7 @@ public class TransactionBookServiceImpl implements TransactionBookService{
     public ResponseData readTransactionBooksService(Boolean status) {
         // TODO Auto-generated method stub
         if (status == null) {
-            categories = TransactionBookRepository.findAll();
+            categories = transactionBookRepository.findAll();
           }
   
         responseData = new ResponseData(200, "success", categories);
@@ -86,26 +86,26 @@ public class TransactionBookServiceImpl implements TransactionBookService{
     @Override
     public ResponseData readTransactionBookService(Integer id) throws Exception {
         // Find TransactionBook
-        Optional<TransactionBook> TransactionBookFind = TransactionBookRepository.findById(id);
+        Optional<TransactionBook> TransactionBookFind = transactionBookRepository.findById(id);
         // Validate book if is not found
-        TransactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
+        transactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
 
         // get TransactionBook
-        TransactionBook = TransactionBookFind.get();
+        transactionBook = TransactionBookFind.get();
         // response data
-        responseData = new ResponseData(200, "success", TransactionBook);
+        responseData = new ResponseData(200, "success", transactionBook);
         return responseData;
     }
 
     @Override
     public ResponseData updateTransactionBookService(Integer id, TransactionBookRequest request) throws Exception {
         // TODO Auto-generated method stub
-        Optional<TransactionBook> TransactionBookFind = TransactionBookRepository.findById(id);
-        TransactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
+        Optional<TransactionBook> TransactionBookFind = transactionBookRepository.findById(id);
+        transactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
 
-        TransactionBook = TransactionBookFind.get();
-        TransactionBook.setBookId(request.getBookId());
-        TransactionBook.setUserId(request.getUserId());
+        transactionBook = TransactionBookFind.get();
+        transactionBook.setBookId(request.getBookId());
+        transactionBook.setUserId(request.getUserId());
 
         // Find category name
         Optional<Book> book = bookRepository.findById(request.getBookId());
@@ -117,28 +117,28 @@ public class TransactionBookServiceImpl implements TransactionBookService{
             throw new CustomNotFoundException("ID User is not found!");
         }
 
-        TransactionBookRepository.save(TransactionBook);
+        transactionBookRepository.save(transactionBook);
 
-        responseData = new ResponseData(200, "TransactionBook success updated", TransactionBook);
+        responseData = new ResponseData(200, "TransactionBook success updated", transactionBook);
         return responseData;
     }
 
     @Override
     public ResponseData returnTransactionBookService(Integer id) throws Exception {
         // TODO Auto-generated method stub
-        Optional<TransactionBook> TransactionBookFind = TransactionBookRepository.findById(id);
-        TransactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
+        Optional<TransactionBook> TransactionBookFind = transactionBookRepository.findById(id);
+        transactionBookValidator.validateTransactionBookNotFound(TransactionBookFind);
 
-        TransactionBook = TransactionBookFind.get();
-        TransactionBook.setBookId(TransactionBook.getBookId());
-        TransactionBook.setUserId(TransactionBook.getUserId());
-        TransactionBook.setIsBorrowed(false);
-        TransactionBook.setBorrowedDate(TransactionBook.getBorrowedDate());
-        TransactionBook.setReturnedDate(dateTime.toString());
+        transactionBook = TransactionBookFind.get();
+        transactionBook.setBookId(transactionBook.getBookId());
+        transactionBook.setUserId(transactionBook.getUserId());
+        transactionBook.setIsBorrowed(false);
+        transactionBook.setBorrowedDate(transactionBook.getBorrowedDate());
+        transactionBook.setReturnedDate(dateTime.toString());
 
-        TransactionBookRepository.save(TransactionBook);
+        transactionBookRepository.save(transactionBook);
 
-        responseData = new ResponseData(200, "TransactionBook success updated", TransactionBook);
+        responseData = new ResponseData(200, "TransactionBook success updated", transactionBook);
         return responseData;
     }
  
