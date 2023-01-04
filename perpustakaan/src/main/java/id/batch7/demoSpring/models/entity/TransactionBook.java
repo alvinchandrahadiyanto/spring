@@ -17,7 +17,6 @@ import lombok.Data;
 public class TransactionBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Integer id;
 
     private Long bookId;

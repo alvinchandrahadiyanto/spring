@@ -31,8 +31,10 @@ public class TransactionBookServiceImpl implements TransactionBookService{
     @Autowired
     private TransactionBookValidator TransactionBookValidator;
 
+    @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
     private UserRepository userRepository;
 
     private TransactionBook TransactionBook;
@@ -52,15 +54,15 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setIsBorrowed(true);
         TransactionBook.setBorrowedDate(dateTime.toString());
 
-        // // Find category name
-        // Optional<Book> book = bookRepository.findById((Long)request.getBookId());
-        // Optional<User> user = userRepository.findById((Integer)request.getUserId());
-        // if (Objects.isNull(book)) {
-        //     throw new CustomNotFoundException("ID Book is not found!");
-        // }
-        // if (Objects.isNull(user)) {
-        //     throw new CustomNotFoundException("ID User is not found!");
-        // }
+        // Find category name
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        Optional<User> user = userRepository.findById(request.getUserId());
+        if (Objects.isNull(book)) {
+            throw new CustomNotFoundException("ID Book is not found!");
+        }
+        if (Objects.isNull(user)) {
+            throw new CustomNotFoundException("ID User is not found!");
+        }
 
         // Save to repo
         TransactionBookRepository.save(TransactionBook);
@@ -105,15 +107,15 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setBookId(request.getBookId());
         TransactionBook.setUserId(request.getUserId());
 
-        // // Find category name
-        // Optional<Book> book = bookRepository.findById(request.getBookId());
-        // Optional<User> user = userRepository.findById(request.getUserId());
-        // if (Objects.isNull(book)) {
-        //     throw new CustomNotFoundException("ID Book is not found!");
-        // }
-        // if (Objects.isNull(user)) {
-        //     throw new CustomNotFoundException("ID User is not found!");
-        // }
+        // Find category name
+        Optional<Book> book = bookRepository.findById(request.getBookId());
+        Optional<User> user = userRepository.findById(request.getUserId());
+        if (Objects.isNull(book)) {
+            throw new CustomNotFoundException("ID Book is not found!");
+        }
+        if (Objects.isNull(user)) {
+            throw new CustomNotFoundException("ID User is not found!");
+        }
 
         TransactionBookRepository.save(TransactionBook);
 
@@ -133,16 +135,6 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         TransactionBook.setIsBorrowed(false);
         TransactionBook.setBorrowedDate(TransactionBook.getBorrowedDate());
         TransactionBook.setReturnedDate(dateTime.toString());
-
-        // // Find category name
-        // Optional<Book> book = bookRepository.findById(request.getBookId());
-        // Optional<User> user = userRepository.findById(request.getUserId());
-        // if (Objects.isNull(book)) {
-        //     throw new CustomNotFoundException("ID Book is not found!");
-        // }
-        // if (Objects.isNull(user)) {
-        //     throw new CustomNotFoundException("ID User is not found!");
-        // }
 
         TransactionBookRepository.save(TransactionBook);
 
