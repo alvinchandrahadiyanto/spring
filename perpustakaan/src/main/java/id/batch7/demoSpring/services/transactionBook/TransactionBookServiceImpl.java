@@ -2,7 +2,6 @@ package id.batch7.demoSpring.services.transactionBook;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +56,10 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         // Find category name
         Optional<Book> book = bookRepository.findById(request.getBookId());
         Optional<User> user = userRepository.findById(request.getUserId());
-        if (Objects.isNull(book)) {
+        if (book.isEmpty()) {
             throw new CustomNotFoundException("ID Book is not found!");
         }
-        if (Objects.isNull(user)) {
+        if (user.isEmpty()) {
             throw new CustomNotFoundException("ID User is not found!");
         }
 
@@ -110,10 +109,10 @@ public class TransactionBookServiceImpl implements TransactionBookService{
         // Find category name
         Optional<Book> book = bookRepository.findById(request.getBookId());
         Optional<User> user = userRepository.findById(request.getUserId());
-        if (Objects.isNull(book)) {
+        if (book.isEmpty()) {
             throw new CustomNotFoundException("ID Book is not found!");
         }
-        if (Objects.isNull(user)) {
+        if (user.isEmpty()) {
             throw new CustomNotFoundException("ID User is not found!");
         }
 
